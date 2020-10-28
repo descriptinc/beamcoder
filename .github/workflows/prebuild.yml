@@ -21,6 +21,12 @@ jobs:
         with:
           node-version: 14.8.0
 
+      - name: install native dependencies
+        run: |
+          sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+          sudo apt-get update
+          sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev
+        if: ${{ runner.os == 'Linux' }}
       - run: npm install
       - run: npm lint
       - run: npm run prebuild --upload $GITHUB_TOKEN

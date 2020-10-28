@@ -5,7 +5,6 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "preinstall": "node install_ffmpeg.js",
     "install": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild --runtime napi",
     "test": "tape test/*.js",
