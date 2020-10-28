@@ -41,8 +41,8 @@ jobs:
         if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows
-        run: npx prebuild --runtime napi --include-regex '\.(node|dll)$' --upload ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
+        # --% to Disable powershell parsing https://octopus.com/blog/powershell-pipe-escaping#use-the-powershell-stop-parsing-symbol
+        run: npx prebuild --% --runtime napi --include-regex "\.(node|dll)$" --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for Linux
