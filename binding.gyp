@@ -8,6 +8,9 @@
                   "src/packet.cc", "src/frame.cc",
                   "src/codec_par.cc", "src/format.cc",
                   "src/codec.cc", "src/hwcontext.cc" ],
+    "defines": [
+       "NAPI_VERSION=<(napi_build_version)"
+    ],
     "conditions": [
       ['OS!="win"', {
         "defines": [

@@ -62,6 +62,7 @@ typings/
 
 # Native module build dir
 build/
+prebuilds/
 
 # FFmpeg install folder
 ffmpeg/
