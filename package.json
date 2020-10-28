@@ -1,11 +1,11 @@
 {
   "name": "beamcoder-prebuild",
-  "version": "0.6.10-rc.3",
+  "version": "0.6.10-rc.4",
   "description": "Node.js native bindings to FFmpeg.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "install": "prebuild-install --runtime napi || node-gyp rebuild",
+    "install": "prebuild-install --runtime napi",
     "test": "tape test/*.js",
     "lint": "eslint **/*.js",
     "lint-html": "eslint **/*.js -f html -o ./reports/lint-results.html",
@@ -21,10 +21,8 @@
     ]
   },
   "files": [
-    "src/**",
     "types/**",
     "beamstreams.js",
-    "binding.gyp",
     "index.d.ts",
     "index.js",
     "LICENSE",
