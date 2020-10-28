@@ -28,9 +28,12 @@ jobs:
           sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev
         if: ${{ runner.os == 'Linux' }}
 
-      - run: node ./install_ffmpeg.js
+      - name: install Mac dependencies
+        run: brew update-reset
+        if: ${{ runner.os == 'macOS'}}
+
+      - name: install ffmpeg
+        run: node ./install_ffmpeg.js
       - run: npm install
       - run: npm run lint
-      - run: npx prebuild --runtime napi --upload $GITHUB_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npx prebuild --runtime napi --upload ${{ secrets.GITHUB_TOKEN }}
