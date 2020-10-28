@@ -41,7 +41,7 @@ jobs:
         if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows
-        run: npx prebuild --runtime napi --include-regex '"\.(node|dll)$"' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --include-regex '\.(node^|dll)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for Linux
