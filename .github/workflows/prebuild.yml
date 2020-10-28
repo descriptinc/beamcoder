@@ -39,8 +39,8 @@ jobs:
       - run: npm install
       - run: npm run lint
       - name: prebuild for node (N-API)
-        run: npx prebuild --runtime napi --upload ${{ secrets.GITHUB_TOKEN }}
-      - name: prebuild for electron 10 (ABI 82)
-        run: npx prebuild --runtime electron --target 82 --upload ${{ secrets.GITHUB_TOKEN }}
-      - name: prebuild for electron 11 (ABI 85)
-        run: npx prebuild --runtime electron --target 85 --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --include-regex '\.(node|dll)$' --upload ${{ secrets.GITHUB_TOKEN }}
+#      - name: prebuild for electron 10 (ABI 82)
+#        run: npx prebuild --runtime electron --target 82 --upload ${{ secrets.GITHUB_TOKEN }}
+#      - name: prebuild for electron 11 (ABI 85)
+#        run: npx prebuild --runtime electron --target 85 --upload ${{ secrets.GITHUB_TOKEN }}
