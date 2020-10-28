@@ -29,11 +29,18 @@ jobs:
         if: ${{ runner.os == 'Linux' }}
 
       - name: install Mac dependencies
-        run: brew update-reset
+        run: brew install nasm pkg-config ffmpeg
         if: ${{ runner.os == 'macOS'}}
 
-      - name: install ffmpeg
+      - name: install Windows dependencies
         run: node ./install_ffmpeg.js
+        if: ${{ runner.os == 'Windows'}}
+
       - run: npm install
       - run: npm run lint
-      - run: npx prebuild --runtime napi --upload ${{ secrets.GITHUB_TOKEN }}
+      - name: prebuild for node (N-API)
+        run: npx prebuild --runtime napi --upload ${{ secrets.GITHUB_TOKEN }}
+      - name: prebuild for electron 10 (ABI 82)
+        run: npx prebuild --runtime electron --target 82 --upload ${{ secrets.GITHUB_TOKEN }}
+      - name: prebuild for electron 11 (ABI 85)
+        run: npx prebuild --runtime electron --target 85 --upload ${{ secrets.GITHUB_TOKEN }}
