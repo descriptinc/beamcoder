@@ -1,6 +1,5 @@
 const { resolve, basename } = require('path');
 const { execSync } = require('child_process');
-const { existsSync } = require('fs');
 
 function logAndExec(cmd) {
   console.log(`EXEC ${cmd}`);
@@ -8,34 +7,45 @@ function logAndExec(cmd) {
 }
 
 const baseDir = resolve(__dirname, 'build/Release');
+const skippedLibs = new Set();
+const copiedLibs = new Set();
 
 function copyDylibs(binaryName) {
   const binaryPath = resolve(baseDir, binaryName);
   console.log(`Inspecting ${binaryPath}`);
   const lines = execSync(`otool -L ${binaryPath}`).toString('utf8').split('\n');
-  const libs = [];
+  const libsToRewrite = [];
   for (const line of lines) {
-    // Only operate on dylibs in /usr/local
-    const match = /\/usr\/local\/\S+\.dylib/.exec(line);
-    if (match) {
-      const [path] = match;
+    const match = /\S+\.dylib/.exec(line);
+    if (!match) {
+      console.log(`[DEBUG] skipping otool output: ${line}`);
+      continue;
+    }
+    const [path] = match;
+    if (path.startsWith('/usr/local')) {
       const filename = basename(path);
       const newFilename = resolve(baseDir, filename);
-      if (!existsSync(newFilename)) {
+      if (!copiedLibs.has(path)) {
+        copiedLibs.add(path);
         logAndExec(`cp ${path} ${newFilename}`);
         logAndExec(`chmod u+w ${newFilename}`);
         copyDylibs(filename);
-      } else {
-        console.log(`[DEBUG] skipping file because it already exists: ${newFilename}`);
       }
-      libs.push({ path, filename });
+      libsToRewrite.push({path, filename});
     } else {
-      console.log(`[DEBUG] skipping otool output: ${line}`);
+      skippedLibs.add(path);
     }
   }
-  if (libs.length > 0) {
-    logAndExec(`install_name_tool ${libs.map(({path, filename}) => `-change ${path} @rpath/${filename}`).join(' ')} ${binaryPath}`);
+  if (libsToRewrite.length > 0) {
+    logAndExec(`install_name_tool ${libsToRewrite.map(({path, filename}) => `-change ${path} @rpath/${filename}`).join(' ')} ${binaryPath}`);
   }
 }
 
 copyDylibs('beamcoder.node');
+
+for (const lib of Array.from(skippedLibs).sort()) {
+  console.log(`[NOTE] skipped ${lib}`);
+}
+for (const lib of Array.from(copiedLibs).sort()) {
+  console.log(`Copied ${lib}`);
+}
