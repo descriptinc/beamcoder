@@ -36,6 +36,14 @@ jobs:
         run: node ./install_ffmpeg.js
         if: ${{ runner.os == 'Windows'}}
 
-      - run: npm install
-      - name: prebuild for node (N-API)
-        run: npm run prebuild -- --upload ${{ secrets.GITHUB_TOKEN }}
+      - name: prebuild for macOS
+        run: npx prebuild --runtime napi --include-regex '\.(node|dylib)$' --upload ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ runner.os == 'macOS'}}
+
+      - name: prebuild for Windows
+        run: npx prebuild --runtime napi --include-regex '"\.(node|dll)$"' --upload ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ runner.os == 'Windows'}}
+
+      - name: prebuild for Linux
+        run: npx prebuild --runtime napi --upload ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ runner.os == 'Linux'}}
