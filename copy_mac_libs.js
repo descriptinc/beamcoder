@@ -16,9 +16,8 @@ function copyDylibs(binaryName) {
   const lines = execSync(`otool -L ${binaryPath}`).toString('utf8').split('\n');
   const libsToRewrite = [];
   for (const line of lines) {
-    const match = /\S+\.dylib/.exec(line);
+    const match = /\S+/.exec(line);
     if (!match) {
-      console.log(`[DEBUG] skipping otool output: ${line}`);
       continue;
     }
     const [path] = match;
@@ -32,7 +31,7 @@ function copyDylibs(binaryName) {
         copyDylibs(filename);
       }
       libsToRewrite.push({path, filename});
-    } else {
+    } else if (!path.startsWith(baseDir)) {
       skippedLibs.add(path);
     }
   }
