@@ -37,7 +37,7 @@ jobs:
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for macOS
-        run: npx prebuild --runtime napi --prepack copy_mac_libs.js --include-regex '\.(node|dylib)$' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --include-regex '\.(node|dylib)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows
