@@ -37,7 +37,7 @@ function copyDylibs(binaryName) {
     }
   }
   if (libsToRewrite.length > 0) {
-    logAndExec(`install_name_tool ${libsToRewrite.map(({path, filename}) => `-change ${path} @rpath/${filename}`).join(' ')} ${binaryPath}`);
+    logAndExec(`install_name_tool -id @rpath/${binaryName} ${libsToRewrite.map(({path, filename}) => `-change ${path} @rpath/${filename}`).join(' ')} ${binaryPath}`);
   }
 }
 
