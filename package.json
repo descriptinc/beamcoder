@@ -6,6 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "install": "node install.js",
+    "postinstall": "patch-package",
     "test": "tape test/*.js",
     "lint": "eslint **/*.js",
     "lint-html": "eslint **/*.js -f html -o ./reports/lint-results.html",
