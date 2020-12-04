@@ -23,6 +23,8 @@ jobs:
 
       - name: npm install
         run: npm install
+        env:
+          SKIP_PREBUILD_INSTALL: true
 
       - name: install Linux dependencies
         run: |
