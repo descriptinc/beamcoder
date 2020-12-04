@@ -182,12 +182,12 @@ async function darwin() {
     else throw e;
   });
 
-  const ffmpegFilename = 'ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc3';
+  const ffmpegFilename = 'ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc4';
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
     const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
     await get(
       ws,
-      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v1.21.rc3/${ffmpegFilename}.zip`,
+      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v1.21.rc4/${ffmpegFilename}.zip`,
       `${ffmpegFilename}.zip`
     ).catch(async (err) => {
       if (err.name === 'RedirectError') {
