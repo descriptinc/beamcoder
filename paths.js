@@ -20,6 +20,7 @@
 */
 
 const path = require('path');
+const os = require('os');
 
 function getPath(name) {
   // TODO: handle different platforms and architectures
