@@ -26,6 +26,7 @@
     "beamstreams.js",
     "index.d.ts",
     "index.js",
+    "paths.js",
     "install.js",
     "LICENSE",
     "README.md"
