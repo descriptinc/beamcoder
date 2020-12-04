@@ -1,12 +1,12 @@
 {
   "name": "beamcoder-prebuild",
-  "version": "0.6.10-rc.16",
+  "version": "0.6.10-rc.17",
   "description": "Node.js native bindings to FFmpeg.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "install": "node install.js",
-    "postinstall": "patch-package",
+    "postinstall": "node postinstall.js",
     "test": "tape test/*.js",
     "lint": "eslint **/*.js",
     "lint-html": "eslint **/*.js -f html -o ./reports/lint-results.html",
@@ -28,6 +28,7 @@
     "index.js",
     "paths.js",
     "install.js",
+    "postinstall.js",
     "LICENSE",
     "README.md"
   ],
