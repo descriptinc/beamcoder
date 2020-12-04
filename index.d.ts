@@ -11,6 +11,7 @@ export * from "./types/Encoder"
 export * from "./types/Muxer"
 export * from "./types/Beamstreams"
 export * from "./types/HWContext"
+export * from "./types/paths"
 
 export const AV_NOPTS_VALUE: number
 
@@ -79,8 +80,5 @@ export function protocols(): { inputs: Array<string>, outputs: Array<string> }
  * `trace` - extremely verbose debugging for libav* developers
  */
 export function logging(level?: string): string | undefined
-
-export const ffmpegPath: string
-export const ffprobePath: string
 
 export as namespace Beamcoder

@@ -49,5 +49,5 @@ function getPath(name) {
 module.exports = {
   ffmpegPath: getPath('ffmpeg'),
   ffprobePath: getPath('ffprobe'),
-  beamcoder: getPath('beamcoder.node'),
+  beamcoderPath: getPath('beamcoder.node'),
 };
