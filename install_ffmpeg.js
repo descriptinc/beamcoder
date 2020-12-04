@@ -175,35 +175,38 @@ sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-
 }
 
 async function darwin() {
-  console.log('Checking for FFmpeg dependencies via HomeBrew.');
-  let output;
-  let returnMessage;
-  
-  try {
-    output = await exec('brew list ffmpeg');
-    returnMessage = 'FFmpeg already present via Homebrew.';
-  } catch (err) {
-    if (err.stderr !== 'Error: No such keg: /usr/local/Cellar/ffmpeg\n') {
-      console.error(err);
-      console.log('Either Homebrew is not installed or something else is wrong.\nExiting');
-      process.exit(1);
-    }
+  console.log('Checking/downloading ffmpeg shared libraries');
 
-    console.log('FFmpeg not installed. Attempting to install via Homebrew.');
-    try {
-      output = await exec('brew install nasm pkg-config texi2html ffmpeg');
-      returnMessage = 'FFmpeg installed via Homebrew.';
-    } catch (err) {
-      console.log('Failed to install ffmpeg:\n');
-      console.error(err);
-      process.exit(1);
-    }
-  }
+  await mkdir('ffmpeg').catch(e => {
+    if (e.code === 'EEXIST') return;
+    else throw e;
+  });
 
-  console.log(output.stdout);
-  console.log(returnMessage);
+  const ffmpegFilename = 'ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc1';
+  await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
+    const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
+    await get(
+      ws,
+      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v1.21.rc1/${ffmpegFilename}.zip`,
+      `${ffmpegFilename}.zip`
+    ).catch(async (err) => {
+      if (err.name === 'RedirectError') {
+        const redirectURL = err.message;
+        await get(ws, redirectURL, `${ffmpegFilename}.zip`);
+      } else {
+        console.error(err);
+        throw err;
+      }
+    });
 
-  return 0;
+    await exec('npm install unzipper --no-save');
+    const unzipper = require('unzipper');
+    const rs = fs.createReadStream(`ffmpeg/${ffmpegFilename}.zip`);
+    await rs.pipe(unzipper.Extract({ path: `ffmpeg/${ffmpegFilename}` })).on('close', async () => {
+      await exec(`chmod u+x ffmpeg/${ffmpegFilename}/ffmpeg`);
+      await exec(`chmod u+x ffmpeg/${ffmpegFilename}/ffprobe`);
+    });
+  });
 }
 
 switch (os.platform()) {

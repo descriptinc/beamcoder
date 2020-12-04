@@ -28,8 +28,12 @@ jobs:
           sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev
         if: ${{ runner.os == 'Linux' }}
 
-      - name: install Mac dependencies
-        run: brew install nasm pkg-config ffmpeg
+      - name: install Mac dependencies (brew)
+        run: brew install nasm pkg-config
+        if: ${{ runner.os == 'macOS'}}
+
+      - name: install Mac dependencies (shared release)
+        run: node ./install_ffmpeg.js
         if: ${{ runner.os == 'macOS'}}
 
       - name: install Windows dependencies
@@ -37,11 +41,11 @@ jobs:
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for macOS (x64)
-        run: npx prebuild --runtime napi --arch x64 --prepack copy_mac_libs.js --include-regex '\.(node|dylib)$' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for macOS (arm64)
-        run: npx prebuild --runtime napi --arch arm64 --prepack copy_mac_libs.js --include-regex '\.(node|dylib)$' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows

@@ -74,3 +74,5 @@ ffmpeg/
 # Editors and IDE's
 *.swp
 .vscode/
+
+.DS_Store
