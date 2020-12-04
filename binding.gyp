@@ -49,9 +49,12 @@
           "-std=c++11",
           "-fexceptions"
         ],
+        "include_dirs": [
+          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc2/include/"
+        ],
         "link_settings": {
           "library_dirs": [
-            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc1/"
+            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc2/"
           ],
           "libraries": [
             "-Wl,-rpath,@loader_path",
@@ -72,7 +75,7 @@
             {
               "destination": "build/Release/",
               "files": [
-                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc1').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc1/' + f).join(' ')\")"
+                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc2').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc2/' + f).join(' ')\")"
               ]
             }
           ]
