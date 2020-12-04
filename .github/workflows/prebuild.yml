@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 14.8.0
 
+      - name: npm install
+        run: npm install
+
       - name: install Linux dependencies
         run: |
           sudo add-apt-repository ppa:jonathonf/ffmpeg-4

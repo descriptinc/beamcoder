@@ -182,12 +182,12 @@ async function darwin() {
     else throw e;
   });
 
-  const ffmpegFilename = 'ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc2';
+  const ffmpegFilename = 'ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc3';
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
     const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
     await get(
       ws,
-      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v1.21.rc2/${ffmpegFilename}.zip`,
+      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v1.21.rc3/${ffmpegFilename}.zip`,
       `${ffmpegFilename}.zip`
     ).catch(async (err) => {
       if (err.name === 'RedirectError') {
@@ -199,13 +199,7 @@ async function darwin() {
       }
     });
 
-    await exec('npm install unzipper --no-save');
-    const unzipper = require('unzipper');
-    const rs = fs.createReadStream(`ffmpeg/${ffmpegFilename}.zip`);
-    await rs.pipe(unzipper.Extract({ path: `ffmpeg/${ffmpegFilename}` })).on('close', async () => {
-      await exec(`chmod u+x ffmpeg/${ffmpegFilename}/ffmpeg`);
-      await exec(`chmod u+x ffmpeg/${ffmpegFilename}/ffprobe`);
-    });
+    await exec(`unzip ffmpeg/${ffmpegFilename}.zip -d ffmpeg/${ffmpegFilename}/`);
   });
 }
 
