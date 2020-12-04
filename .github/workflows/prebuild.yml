@@ -54,10 +54,9 @@ jobs:
 #        if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows
-        # I can't get the pipe character to work on windows, so to include both .node and .dll files I have this weird regexp
-        run: npx prebuild --runtime napi --include-regex '\.[nd][ol][dl]e?$' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --include-regex '(\.node^|\.dll^|ffmpeg^|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for Linux
-        run: npx prebuild --runtime napi --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'Linux'}}

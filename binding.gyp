@@ -35,7 +35,16 @@
             "-lswresample",
             "-lswscale"
           ]
-        }
+        },
+        "copies": [
+            {
+              "destination": "build/Release/",
+              "files": [
+                "node_modules/ffmpeg-ffprobe-static/ffmpeg",
+                "node_modules/ffmpeg-ffprobe-static/ffprobe",
+              ]
+            }
+          ]
       }],
       ["OS=='mac'", {
         "defines": [
@@ -116,6 +125,8 @@
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/postproc-55.dll",
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/swresample-3.dll",
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/swscale-5.dll"
+                "node_modules/ffmpeg-ffprobe-static/ffmpeg.exe",
+                "node_modules/ffmpeg-ffprobe-static/ffprobe.exe",
               ]
             }
           ]
