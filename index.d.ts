@@ -80,4 +80,7 @@ export function protocols(): { inputs: Array<string>, outputs: Array<string> }
  */
 export function logging(level?: string): string | undefined
 
+export const ffmpegPath: string
+export const ffprobePath: string
+
 export as namespace Beamcoder

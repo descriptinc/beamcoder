@@ -68,8 +68,7 @@ function getPath(name) {
   );
 }
 
-module.exports = {
-  beamcoder,
-  ffmpegPath: getPath('ffmpeg'),
-  ffprobePath: getPath('ffprobe'),
-};
+beamcoder.ffmpegPath = getPath('ffmpeg');
+beamcoder.ffprobePath = getPath('ffprobe');
+
+module.exports = beamcoder;
