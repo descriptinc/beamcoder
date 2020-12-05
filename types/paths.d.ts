@@ -1,5 +1,5 @@
 declare module "beamcoder/paths" {
-    export const ffmpegPath: string
-    export const ffprobePath: string
-    export const beamcoderPath: string
+    export const ffmpegPath: string | null;
+    export const ffprobePath: string | null;
+    export const beamcoderPath: string | null;
 }
