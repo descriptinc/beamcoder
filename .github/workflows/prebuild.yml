@@ -33,7 +33,7 @@ jobs:
           sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev
         if: ${{ runner.os == 'Linux' }}
 
-      - name: install Mac dependencies (brew)
+      - name: install Mac build dependencies (brew)
         run: brew install nasm pkg-config
         if: ${{ runner.os == 'macOS'}}
 
