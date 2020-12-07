@@ -1,6 +1,6 @@
 {
   "name": "beamcoder-prebuild",
-  "version": "0.6.10-rc.22",
+  "version": "0.6.10-rc.23",
   "description": "Node.js native bindings to FFmpeg.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -27,6 +27,7 @@
     "index.d.ts",
     "index.js",
     "paths.js",
+    "paths.d.ts",
     "install.js",
     "postinstall.js",
     "LICENSE",
