@@ -23,11 +23,11 @@ const path = require('path');
 const os = require('os');
 
 function getPath(name) {
-  const binaries = Object.assign(Object.create(null), {
+  const binaries = {
     darwin: ['x64'],
-    linux: ['x64', 'ia32', 'arm64', 'arm'],
-    win32: ['x64', 'ia32']
-  });
+    linux: ['x64'],
+    win32: ['x64'],
+  };
 
   const platform = process.env.npm_config_platform || os.platform();
 

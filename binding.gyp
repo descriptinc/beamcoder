@@ -47,6 +47,9 @@
           ]
       }],
       ["OS=='mac'", {
+        "variables": {
+           "ffmpeg_version": "1.21.rc5"
+        },
         "defines": [
           "__STDC_CONSTANT_MACROS"
         ],
@@ -59,11 +62,11 @@
           "-fexceptions"
         ],
         "include_dirs": [
-          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc4/include/"
+          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/include/"
         ],
         "link_settings": {
           "library_dirs": [
-            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc4/"
+            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/"
           ],
           "libraries": [
             "-Wl,-rpath,@loader_path",
@@ -84,7 +87,7 @@
             {
               "destination": "build/Release/",
               "files": [
-                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc4').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.1.21.rc4/' + f).join(' ')\")"
+                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/' + f).join(' ')\")"
               ]
             }
           ]
