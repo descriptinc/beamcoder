@@ -175,35 +175,34 @@ sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-
 }
 
 async function darwin() {
-  console.log('Checking for FFmpeg dependencies via HomeBrew.');
-  let output;
-  let returnMessage;
-  
-  try {
-    output = await exec('brew list ffmpeg');
-    returnMessage = 'FFmpeg already present via Homebrew.';
-  } catch (err) {
-    if (err.stderr !== 'Error: No such keg: /usr/local/Cellar/ffmpeg\n') {
-      console.error(err);
-      console.log('Either Homebrew is not installed or something else is wrong.\nExiting');
-      process.exit(1);
-    }
+  console.log('Checking/downloading ffmpeg shared libraries');
 
-    console.log('FFmpeg not installed. Attempting to install via Homebrew.');
-    try {
-      output = await exec('brew install nasm pkg-config texi2html ffmpeg');
-      returnMessage = 'FFmpeg installed via Homebrew.';
-    } catch (err) {
-      console.log('Failed to install ffmpeg:\n');
-      console.error(err);
-      process.exit(1);
-    }
-  }
+  await mkdir('ffmpeg').catch(e => {
+    if (e.code === 'EEXIST') return;
+    else throw e;
+  });
 
-  console.log(output.stdout);
-  console.log(returnMessage);
+  const version = '1.21.rc5';
+  const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-x86_64.${version}`;
 
-  return 0;
+  await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
+    const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
+    await get(
+      ws,
+      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v${version}/${ffmpegFilename}.zip`,
+      `${ffmpegFilename}.zip`
+    ).catch(async (err) => {
+      if (err.name === 'RedirectError') {
+        const redirectURL = err.message;
+        await get(ws, redirectURL, `${ffmpegFilename}.zip`);
+      } else {
+        console.error(err);
+        throw err;
+      }
+    });
+
+    await exec(`unzip ffmpeg/${ffmpegFilename}.zip -d ffmpeg/${ffmpegFilename}/`);
+  });
 }
 
 switch (os.platform()) {

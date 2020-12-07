@@ -11,6 +11,7 @@ export * from "./types/Encoder"
 export * from "./types/Muxer"
 export * from "./types/Beamstreams"
 export * from "./types/HWContext"
+export * from "./types/paths"
 
 export const AV_NOPTS_VALUE: number
 
