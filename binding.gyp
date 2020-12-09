@@ -98,7 +98,8 @@
           "Release": {
             "msvs_settings": {
               "VCCLCompilerTool": {
-                "RuntimeTypeInfo": "true"
+                "RuntimeTypeInfo": "true",
+                "AdditionalOptions": ['/WX']
               }
             }
           }
