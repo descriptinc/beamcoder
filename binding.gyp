@@ -94,12 +94,14 @@
       }
       ],
       ['OS=="win"', {
+        "cflags_cc": [
+          "/WX"
+        ],
         "configurations": {
           "Release": {
             "msvs_settings": {
               "VCCLCompilerTool": {
-                "RuntimeTypeInfo": "true",
-                "AdditionalOptions": ['/WX']
+                "RuntimeTypeInfo": "true"
               }
             }
           }
@@ -128,7 +130,7 @@
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/avutil-56.dll",
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/postproc-55.dll",
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/swresample-3.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/swscale-5.dll",
+                "ffmpeg/ffmpeg-4.3-win64-shared/bin/swscale-5.dll"
                 "node_modules/ffmpeg-ffprobe-static/ffmpeg.exe",
                 "node_modules/ffmpeg-ffprobe-static/ffprobe.exe",
               ]

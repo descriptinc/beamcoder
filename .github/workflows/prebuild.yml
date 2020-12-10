@@ -37,27 +37,22 @@ jobs:
         run: brew install nasm pkg-config
         if: ${{ runner.os == 'macOS'}}
 
-      - name: install Mac dependencies (shared release)
+      - name: install ffmpeg dependencies (shared release)
         run: node ./install_ffmpeg.js
-        if: ${{ runner.os == 'macOS'}}
 
-      - name: install Windows dependencies
-        run: node ./install_ffmpeg.js
-        if: ${{ runner.os == 'Windows'}}
-
-      - name: prebuild for macOS (x64)
-        run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ runner.os == 'macOS'}}
+#      - name: prebuild for macOS (x64)
+#        run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+#        if: ${{ runner.os == 'macOS'}}
 
 #      - name: prebuild for macOS (arm64)
 #        run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
 #        if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows
-        run: npx prebuild --runtime napi --include-regex '"(\.node|\.dll|ffmpeg\.exe|ffprobe\.exe)$"' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --include-regex '"(\.node|\.dll|ffmpeg\.exe|ffprobe\.exe)$"'
         shell: bash
         if: ${{ runner.os == 'Windows'}}
 
-      - name: prebuild for Linux
-        run: npx prebuild --runtime napi --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ runner.os == 'Linux'}}
+#      - name: prebuild for Linux
+#        run: npx prebuild --runtime napi --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+#        if: ${{ runner.os == 'Linux'}}
