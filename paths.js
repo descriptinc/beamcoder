@@ -22,7 +22,7 @@
 const path = require('path');
 const os = require('os');
 
-function getPath(name) {
+function getPath(name, addDotExeOnWindows) {
   const binaries = {
     darwin: ['x64'],
     linux: ['x64'],
@@ -41,12 +41,12 @@ function getPath(name) {
     __dirname,
     'build',
     'Release',
-    platform === 'win32' ? name + '.exe' : name
+    platform === 'win32' && addDotExeOnWindows ? name + '.exe' : name
   );
 }
 
 module.exports = {
-  ffmpegPath: getPath('ffmpeg'),
-  ffprobePath: getPath('ffprobe'),
-  beamcoderPath: getPath('beamcoder.node'),
+  ffmpegPath: getPath('ffmpeg', true),
+  ffprobePath: getPath('ffprobe', true),
+  beamcoderPath: getPath('beamcoder.node', false),
 };
