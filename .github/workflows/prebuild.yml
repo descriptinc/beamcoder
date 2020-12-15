@@ -46,7 +46,7 @@ jobs:
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for macOS (x64)
-        run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --debug --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'macOS'}}
 
 #      - name: prebuild for macOS (arm64)
@@ -54,10 +54,10 @@ jobs:
 #        if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows
-        run: npx prebuild --runtime napi --include-regex '"(\.node|\.dll|ffmpeg\.exe|ffprobe\.exe)$"' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --debug --runtime napi --include-regex '"(\.node|\.dll|ffmpeg\.exe|ffprobe\.exe)$"' --upload ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for Linux
-        run: npx prebuild --runtime napi --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --debug --runtime napi --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'Linux'}}
