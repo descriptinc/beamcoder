@@ -95,7 +95,7 @@
       ],
       ['OS=="win"', {
         "configurations": {
-          "Release": {
+          "Debug": {
             "msvs_settings": {
               "VCCLCompilerTool": {
                 "RuntimeTypeInfo": "true",
@@ -119,7 +119,7 @@
         ],
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "build/Debug/",
               "files": [
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/avcodec-58.dll",
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/avdevice-58.dll",
