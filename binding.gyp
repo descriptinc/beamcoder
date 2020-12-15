@@ -62,11 +62,11 @@
           "-fexceptions"
         ],
         "include_dirs": [
-          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/include/"
+          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-debug-x86_64.<(ffmpeg_version)/include/"
         ],
         "link_settings": {
           "library_dirs": [
-            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/"
+            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-debug-x86_64.<(ffmpeg_version)/"
           ],
           "libraries": [
             "-Wl,-rpath,@loader_path",
@@ -87,7 +87,7 @@
             {
               "destination": "build/Debug/",
               "files": [
-                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/' + f).join(' ')\")"
+                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-debug-x86_64.<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-debug-x86_64.<(ffmpeg_version)/' + f).join(' ')\")"
               ]
             }
           ]
