@@ -38,7 +38,7 @@
         },
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "build/Debug/",
               "files": [
                 "node_modules/ffmpeg-ffprobe-static/ffmpeg",
                 "node_modules/ffmpeg-ffprobe-static/ffprobe",
@@ -85,7 +85,7 @@
         },
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "build/Debug/",
               "files": [
                 "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/' + f).join(' ')\")"
               ]

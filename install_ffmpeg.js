@@ -183,7 +183,7 @@ async function darwin() {
   });
 
   const version = '1.21.rc5';
-  const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-x86_64.${version}`;
+  const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-debug-x86_64.${version}`;
 
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
     const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
