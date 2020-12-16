@@ -182,7 +182,7 @@ async function darwin() {
     else throw e;
   });
 
-  const version = '1.21.rc5';
+  const version = '1.21.rc6';
   const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-x86_64.${version}`;
 
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
