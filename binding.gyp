@@ -38,7 +38,7 @@
         },
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "<(PRODUCT_DIR)",
               "files": [
                 "node_modules/ffmpeg-ffprobe-static/ffmpeg",
                 "node_modules/ffmpeg-ffprobe-static/ffprobe",
@@ -85,7 +85,7 @@
         },
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "<(PRODUCT_DIR)",
               "files": [
                 "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/' + f).join(' ')\")"
               ]
@@ -119,7 +119,7 @@
         ],
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "<(PRODUCT_DIR)",
               "files": [
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/avcodec-58.dll",
                 "ffmpeg/ffmpeg-4.3-win64-shared/bin/avdevice-58.dll",
