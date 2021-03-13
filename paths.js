@@ -40,7 +40,8 @@ function getPath(name, addDotExeOnWindows) {
   return path.join(
     __dirname,
     'build',
-    'Release',
+    // FIXME: toggleable
+    'Debug',
     platform === 'win32' && addDotExeOnWindows ? name + '.exe' : name
   );
 }
