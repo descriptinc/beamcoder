@@ -48,7 +48,7 @@
       }],
       ["OS=='mac'", {
         "variables": {
-           "ffmpeg_version": "1.31.rc1"
+           "ffmpeg_version": "1.31rc1"
         },
         "defines": [
           "__STDC_CONSTANT_MACROS"
