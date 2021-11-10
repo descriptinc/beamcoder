@@ -193,7 +193,7 @@ async function darwin() {
     const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
     await get(
       ws,
-      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v${version}-alpha/${ffmpegFilename}.zip`,
+      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v${version}-alpha2/${ffmpegFilename}.zip`,
       `${ffmpegFilename}.zip`
     ).catch(async (err) => {
       if (err.name === 'RedirectError') {
