@@ -24,7 +24,7 @@ const os = require('os');
 
 function getPath(name, addDotExeOnWindows) {
   const binaries = {
-    darwin: ['x64'],
+    darwin: ['x64', 'arm64'],
     linux: ['x64'],
     win32: ['x64'],
   };
