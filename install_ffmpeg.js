@@ -183,7 +183,7 @@ async function darwin() {
   });
 
   const version = '1.31rc1';
-  const arch = os.arch()
+  let arch = os.arch()
   if (arch === 'x64') {
     arch = 'x86_64';
   }
