@@ -183,7 +183,11 @@ async function darwin() {
   });
 
   const version = '1.31rc1';
-  const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-x86_64.${version}`;
+  const arch = os.arch()
+  if (arch === 'x64') {
+    arch = 'x86_64';
+  }
+  const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-${arch}.${version}`;
   const tag = `v${version}-alpha2`
 
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
@@ -224,7 +228,7 @@ case 'linux':
   }
   break;
 case 'darwin':
-  if (os.arch() != 'x64') {
+  if (os.arch() != 'x64' && os.arch() != 'arm64') {
     console.error('Only 64-bit platforms are supported.');
     process.exit(1);
   } else {
