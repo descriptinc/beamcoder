@@ -19,7 +19,7 @@ jobs:
       - name: Use nodejs
         uses: actions/setup-node@v1
         with:
-          node-version: 14.8.0
+          node-version: 17.0.1
 
       - name: npm install
         run: npm install
