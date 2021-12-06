@@ -50,12 +50,16 @@ jobs:
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild Release for macOS (x64)
-        run: npx prebuild --runtime napi --arch x64 --include-regex'(\.node|\.dylib|ffmpeg|ffprobe)$' --verbose --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --verbose --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'macOS'}}
 
 #      - name: prebuild Debug for macOS (x64)
 #        run: npx prebuild --debug --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
 #        if: ${{ runner.os == 'macOS'}}
+
+      - name: clean build directory for cross-compiling
+        run: rm ./build/Release/*.dylib
+        if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild Release for macOS (arm64)
         run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --verbose --upload ${{ secrets.GITHUB_TOKEN }}
