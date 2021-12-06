@@ -24,6 +24,7 @@ const fs = require('fs');
 const util = require('util');
 const https = require('https');
 const cp = require('child_process');
+const { argv } = require('process');
 const [ mkdir, access, rename, execFile, exec ] = // eslint-disable-line
   [ fs.mkdir, fs.access, fs.rename, cp.execFile, cp.exec ].map(util.promisify);
 
@@ -183,10 +184,21 @@ async function darwin() {
   });
 
   const version = '1.31rc1';
+
+  // default to platform-architecture
   let arch = os.arch()
+
+  // but if the '--arch' argument is provided
+  // use the next argument as the value (e.g. 'x64' or 'arm64')
+  const overrideArchIndex = process.argv.indexOf('--arch');
+  if (0 < overrideArchIndex && overrideArchIndex < process.argv.length - 1) {
+    arch = process.argv[overrideArchIndex + 1];
+  }
+  
   if (arch === 'x64') {
     arch = 'x86_64';
   }
+
   const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-${arch}.${version}`;
   const tag = `v${version}-alpha2`
 

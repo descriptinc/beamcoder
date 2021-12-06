@@ -49,7 +49,7 @@
       ["OS=='mac'", {
         "variables": {
            "ffmpeg_version": "1.31rc1",
-           "host_arch_override": '<!(uname -m)',
+           "target_arch_override": "<!(node -p \"'<(target_arch)' === 'x64' ? 'x86_64' : '<(target_arch)'\")",
         },
         "defines": [
           "__STDC_CONSTANT_MACROS"
@@ -63,11 +63,11 @@
           "-fexceptions"
         ],
         "include_dirs": [
-          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-<(host_arch_override).<(ffmpeg_version)/include/"
+          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)/include/"
         ],
         "link_settings": {
           "library_dirs": [
-            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-<(host_arch_override).<(ffmpeg_version)/"
+            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)/"
           ],
           "libraries": [
             "-Wl,-rpath,@loader_path",
@@ -88,7 +88,7 @@
             {
               "destination": "<(PRODUCT_DIR)",
               "files": [
-                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-<(host_arch_override).<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-<(host_arch_override).<(ffmpeg_version)/' + f).join(' ')\")"
+                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)/' + f).join(' ')\")"
               ]
             }
           ]
