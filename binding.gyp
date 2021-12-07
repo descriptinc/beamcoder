@@ -48,7 +48,7 @@
       }],
       ["OS=='mac'", {
         "variables": {
-           "ffmpeg_version": "v1.33rc1",
+           "ffmpeg_version": "1.33rc1",
            "target_arch_override": "<!(node -p \"'<(target_arch)' === 'x64' ? 'x86_64' : '<(target_arch)'\")",
         },
         "defines": [

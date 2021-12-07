@@ -183,7 +183,7 @@ async function darwin() {
     else throw e;
   });
 
-  const version = 'v1.33rc1';
+  const version = '1.33rc1';
 
   // default to platform-architecture
   let arch = os.arch()
