@@ -106,17 +106,17 @@
           }
         },
         "include_dirs" : [
-          "ffmpeg/ffmpeg-4.3-win64-shared/include"
+          "ffmpeg/ffmpeg-4.x-win64-shared/include"
         ],
         "libraries": [
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avcodec",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avdevice",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avfilter",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avformat",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avutil",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/postproc",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/swresample",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/swscale"
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avcodec",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avdevice",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avfilter",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avformat",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avutil",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/postproc",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/swresample",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/swscale"
         ],
         "copies": [
             {
