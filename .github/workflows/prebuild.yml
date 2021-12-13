@@ -67,7 +67,6 @@ jobs:
 
       - name: prebuild for Windows
         run: npx prebuild --runtime napi --include-regex '"(\.node|\.dll|ffmpeg\.exe|ffprobe\.exe)$"' --verbose --upload ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
         if: ${{ runner.os == 'Windows'}}
 
       - name: prebuild for Linux
