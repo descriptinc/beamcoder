@@ -84,7 +84,7 @@ async function inflate(rs, folder, name) {
   return new Promise((comp, err) => {
     console.log(`Unzipping '${folder}/${name}.zip'.`);
     rs.pipe(unzip.Extract({ path: folder }).on('close', () => {
-      fs.rename(`./${folder}/${directoryName}`, `./${folder}/${name}`, () => {
+      fs.rename(`${folder}/${directoryName}`, `${folder}/${name}`, () => {
         console.log(`Unzipping of '${folder}/${name}.zip' completed.`);
         comp();
       });
