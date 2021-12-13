@@ -122,14 +122,14 @@
             {
               "destination": "<(PRODUCT_DIR)",
               "files": [
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avcodec-58.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avdevice-58.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avfilter-7.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avformat-58.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avutil-56.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/postproc-55.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/swresample-3.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/swscale-5.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avcodec-58.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avdevice-58.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avfilter-7.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avformat-58.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avutil-56.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/postproc-55.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/swresample-3.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/swscale-5.dll",
                 "node_modules/ffmpeg-ffprobe-static/ffmpeg.exe",
                 "node_modules/ffmpeg-ffprobe-static/ffprobe.exe",
               ]
