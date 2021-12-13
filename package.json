@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "eslint": "^8.1.0",
-    "tape": "^5.3.1".
+    "tape": "^5.3.1",
     "ffmpeg-ffprobe-static": "^4.3.1-rc.3",
     "patch-package": "^6.2.2",
     "prebuild": "^10.0.1"
