@@ -66,7 +66,7 @@ jobs:
         if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild for Windows
-        run: npx prebuild --runtime napi --include-regex '"(\.node|\.dll|ffmpeg\.exe|ffprobe\.exe)$"' --verbose --upload ${{ secrets.GITHUB_TOKEN }}
+        run: npx prebuild --runtime napi --include-regex '.node|.dll|.exe' --verbose --upload ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         if: ${{ runner.os == 'Windows'}}
 
