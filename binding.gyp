@@ -130,8 +130,8 @@
                 "ffmpeg/ffmpeg-4.x-win64-shared/bin/postproc-55.dll",
                 "ffmpeg/ffmpeg-4.x-win64-shared/bin/swresample-3.dll",
                 "ffmpeg/ffmpeg-4.x-win64-shared/bin/swscale-5.dll",
-                "ffmpeg/ffmpeg-4.x-win64-shared/bin/ffmpeg.exe",
-                "ffmpeg/ffmpeg-4.x-win64-shared/bin/ffprobe.exe"
+                "node_modules/ffmpeg-ffprobe-static/ffmpeg.exe",
+                "node_modules/ffmpeg-ffprobe-static/ffprobe.exe"
               ]
             }
           ]
