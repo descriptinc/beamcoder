@@ -70,6 +70,10 @@ jobs:
         shell: bash
         if: ${{ runner.os == 'Windows'}}
 
-      - name: prebuild for Linux
-        run: npx prebuild --runtime napi --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+      - name: prebuild for Linux (x64)
+        run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ runner.os == 'Linux'}}
+
+      - name: prebuild for Linux (arm64)
+        run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'Linux'}}
