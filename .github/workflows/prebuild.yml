@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-latest
           - macos-latest
           - windows-latest
     steps:
@@ -28,7 +28,7 @@ jobs:
 
       - name: install Linux dependencies
         run: |
-          sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+          sudo add-apt-repository ppa:savoury1/ffmpeg4
           sudo apt-get update
           sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libzimg-dev
         if: ${{ runner.os == 'Linux' }}
