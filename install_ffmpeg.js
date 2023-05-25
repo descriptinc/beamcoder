@@ -167,6 +167,10 @@ async function linux() {
     console.error('libswscale.so.5 is not installed.');
     result = 1;
   }
+  if (stdout.indexOf('libzimg.so.1') < 0) {
+    console.error('libzimg.so.1 is not installed.');
+    result = 1;
+  }
 
   if (result === 1) {
     console.log(`Try running the following (Ubuntu/Debian):

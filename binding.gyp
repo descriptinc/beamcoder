@@ -33,7 +33,8 @@
             "-lavutil",
             "-lpostproc",
             "-lswresample",
-            "-lswscale"
+            "-lswscale",
+            "-lzimg"
           ]
         },
         "copies": [
@@ -78,7 +79,8 @@
             "-lavutil",
             "-lpostproc",
             "-lswresample",
-            "-lswscale"
+            "-lswscale",
+            "-lzimg"
           ],
         },
         'xcode_settings': {
