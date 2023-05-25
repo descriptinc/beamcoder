@@ -167,8 +167,8 @@ async function linux() {
     console.error('libswscale.so.5 is not installed.');
     result = 1;
   }
-  if (stdout.indexOf('libzimg.so.1') < 0) {
-    console.error('libzimg.so.1 is not installed.');
+  if (stdout.indexOf('libzimg.so.2') < 0) {
+    console.error('libzimg.so.2 is not installed.');
     result = 1;
   }
 
