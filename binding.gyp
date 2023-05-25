@@ -38,7 +38,7 @@
         },
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "<(PRODUCT_DIR)",
               "files": [
                 "node_modules/ffmpeg-ffprobe-static/ffmpeg",
                 "node_modules/ffmpeg-ffprobe-static/ffprobe",
@@ -48,7 +48,8 @@
       }],
       ["OS=='mac'", {
         "variables": {
-           "ffmpeg_version": "1.21.rc6"
+           "ffmpeg_version": "1.33rc3",
+           "target_arch_override": "<!(node -p \"'<(target_arch)' === 'x64' ? 'x86_64' : '<(target_arch)'\")",
         },
         "defines": [
           "__STDC_CONSTANT_MACROS"
@@ -62,11 +63,11 @@
           "-fexceptions"
         ],
         "include_dirs": [
-          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/include/"
+          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)/include/"
         ],
         "link_settings": {
           "library_dirs": [
-            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/"
+            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)/"
           ],
           "libraries": [
             "-Wl,-rpath,@loader_path",
@@ -85,9 +86,9 @@
         },
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "<(PRODUCT_DIR)",
               "files": [
-                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-x86_64.<(ffmpeg_version)/' + f).join(' ')\")"
+                "<!@(node -p \"require('fs').readdirSync('ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)').map(f => 'ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)/' + f).join(' ')\")"
               ]
             }
           ]
@@ -105,32 +106,32 @@
           }
         },
         "include_dirs" : [
-          "ffmpeg/ffmpeg-4.3-win64-shared/include"
+          "ffmpeg/ffmpeg-4.x-win64-shared/include"
         ],
         "libraries": [
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avcodec",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avdevice",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avfilter",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avformat",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/avutil",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/postproc",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/swresample",
-          "-l../ffmpeg/ffmpeg-4.3-win64-shared/lib/swscale"
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avcodec",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avdevice",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avfilter",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avformat",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/avutil",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/postproc",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/swresample",
+          "-l../ffmpeg/ffmpeg-4.x-win64-shared/lib/swscale"
         ],
         "copies": [
             {
-              "destination": "build/Release/",
+              "destination": "<(PRODUCT_DIR)",
               "files": [
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avcodec-58.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avdevice-58.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avfilter-7.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avformat-58.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/avutil-56.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/postproc-55.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/swresample-3.dll",
-                "ffmpeg/ffmpeg-4.3-win64-shared/bin/swscale-5.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avcodec-58.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avdevice-58.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avfilter-7.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avformat-58.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/avutil-56.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/postproc-55.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/swresample-3.dll",
+                "ffmpeg/ffmpeg-4.x-win64-shared/bin/swscale-5.dll",
                 "node_modules/ffmpeg-ffprobe-static/ffmpeg.exe",
-                "node_modules/ffmpeg-ffprobe-static/ffprobe.exe",
+                "node_modules/ffmpeg-ffprobe-static/ffprobe.exe"
               ]
             }
           ]

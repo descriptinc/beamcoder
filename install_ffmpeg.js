@@ -24,6 +24,7 @@ const fs = require('fs');
 const util = require('util');
 const https = require('https');
 const cp = require('child_process');
+const { argv } = require('process');
 const [ mkdir, access, rename, execFile, exec ] = // eslint-disable-line
   [ fs.mkdir, fs.access, fs.rename, cp.execFile, cp.exec ].map(util.promisify);
 
@@ -83,7 +84,7 @@ async function inflate(rs, folder, name) {
   return new Promise((comp, err) => {
     console.log(`Unzipping '${folder}/${name}.zip'.`);
     rs.pipe(unzip.Extract({ path: folder }).on('close', () => {
-      fs.rename(`./${folder}/${directoryName}`, `./${folder}/${name}`, () => {
+      fs.rename(`${folder}/${directoryName}`, `${folder}/${name}`, () => {
         console.log(`Unzipping of '${folder}/${name}.zip' completed.`);
         comp();
       });
@@ -100,14 +101,16 @@ async function win32() {
     else throw e;
   });
   
-  const ffmpegFilename = 'ffmpeg-4.3-win64-shared';
+  const ffmpegFilename = 'ffmpeg-4.x-win64-shared';
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
     const html = await getHTML('https://github.com/BtbN/FFmpeg-Builds/wiki/Latest', 'latest autobuilds');
     const htmlStr = html.toString('utf-8');
     const autoPos = htmlStr.indexOf('<p><a href=');
     const endPos = htmlStr.indexOf('</div>', autoPos);
     const autoStr = htmlStr.substring(autoPos, endPos);
-    const sharedEndPos = autoStr.lastIndexOf('">win64-gpl-shared-4.3');
+    const sharedEndPos = autoStr.lastIndexOf('">win64-gpl-shared-4.');
+    if (sharedEndPos === -1)
+      throw new Error('Failed to find latest v4.x autobuild from "https://github.com/BtbN/FFmpeg-Builds/wiki/Latest"');
     const startStr = '<p><a href="';
     const sharedStartPos = autoStr.lastIndexOf(startStr, sharedEndPos) + startStr.length;
     const downloadSource = autoStr.substring(sharedStartPos, sharedEndPos);
@@ -182,14 +185,30 @@ async function darwin() {
     else throw e;
   });
 
-  const version = '1.21.rc6';
-  const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-x86_64.${version}`;
+  const version = '1.33rc3';
+
+  // default to platform-architecture
+  let arch = os.arch()
+
+  // but if the '--arch' argument is provided
+  // use the next argument as the value (e.g. 'x64' or 'arm64')
+  const overrideArchIndex = process.argv.indexOf('--arch');
+  if (0 < overrideArchIndex && overrideArchIndex < process.argv.length - 1) {
+    arch = process.argv[overrideArchIndex + 1];
+  }
+  
+  if (arch === 'x64') {
+    arch = 'x86_64';
+  }
+
+  const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-${arch}.${version}`;
+  const tag = `v${version}`
 
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
     const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
     await get(
       ws,
-      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/v${version}/${ffmpegFilename}.zip`,
+      `https://github.com/descriptinc/ffmpeg-build-script/releases/download/${tag}/${ffmpegFilename}.zip`,
       `${ffmpegFilename}.zip`
     ).catch(async (err) => {
       if (err.name === 'RedirectError') {
@@ -211,11 +230,11 @@ case 'win32':
     console.error('Only 64-bit platforms are supported.');
     process.exit(1);
   } else {
-    win32();
+    win32().catch(console.error);
   }
   break;
 case 'linux':
-  if (os.arch() != 'x64') {
+  if (os.arch() != 'x64' && os.arch() != 'arm64') {
     console.error('Only 64-bit platforms are supported.');
     process.exit(1);
   } else {
@@ -223,7 +242,7 @@ case 'linux':
   }
   break;
 case 'darwin':
-  if (os.arch() != 'x64') {
+  if (os.arch() != 'x64' && os.arch() != 'arm64') {
     console.error('Only 64-bit platforms are supported.');
     process.exit(1);
   } else {
