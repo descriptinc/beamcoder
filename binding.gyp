@@ -22,9 +22,7 @@
         ],
         "cflags_cc": [
           "-std=c++11",
-          "-fexceptions",
-          "-static-libgcc",
-          "-static-libstdc++"
+          "-fexceptions"
         ],
         "link_settings": {
           "libraries": [
