@@ -174,7 +174,7 @@ async function linux() {
 
   if (result === 1) {
     console.log(`Try running the following (Ubuntu/Debian):
-sudo add-apt-repository ppa:savoury1/ffmpeg4
+sudo add-apt-repository ppa:jonathonf/ffmpeg-4
 sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libzimg-dev`);
     process.exit(1);
   }
