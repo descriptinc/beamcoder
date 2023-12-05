@@ -28,7 +28,6 @@ jobs:
 
       - name: install Linux dependencies
         run: |
-          sudo add-apt-repository ppa:jonathonf/ffmpeg-4
           sudo apt-get update
           sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libzimg-dev
         if: ${{ runner.os == 'Linux' }}
