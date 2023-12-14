@@ -53,8 +53,7 @@ jobs:
       - name: install Mac build dependencies (brew)
         run: |
           brew install nasm pkg-config 
-          python3 -m pip install packaging
-          echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+          python3 -m pip install packaging setuptools
         if: ${{ runner.os == 'macOS'}}
 
       - name: npm install
