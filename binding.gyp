@@ -1,6 +1,9 @@
 {
   "targets": [{
     "target_name" : "beamcoder",
+    "defines": [
+       "NAPI_VERSION=<(napi_build_version)"
+    ],
     "sources" : [ "src/beamcoder.cc", "src/beamcoder_util.cc",
                   "src/log.cc" ,
                   "src/governor.cc", "src/demux.cc",
