@@ -83,7 +83,7 @@ jobs:
 #        if: ${{ runner.os == 'macOS'}}
 
       - name: clean build directory for cross-compiling
-        run: rm ./build/Release/*.dylib
+        run: rm ./build/Release/*.dylib || true
         if: ${{ runner.os == 'macOS'}}
 
       - name: prebuild Release for macOS (arm64)
