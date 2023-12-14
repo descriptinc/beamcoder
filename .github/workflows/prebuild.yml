@@ -55,7 +55,7 @@ jobs:
           brew install nasm pkg-config pyenv
           pyenv install 3.10
           pyenv global 3.10
-          cat 'eval "$(pyenv init -)"' >> ~/.bashrc
+          echo 'eval "$(pyenv init -)"' >> ~/.bashrc
         if: ${{ runner.os == 'macOS'}}
 
       - name: npm install
