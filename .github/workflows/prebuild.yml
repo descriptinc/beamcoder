@@ -50,14 +50,17 @@ jobs:
         with:
           node-version: 16.13.0
 
+      - name: install Mac build dependencies (brew)
+        run: |
+          brew install nasm pkg-config python3-pip
+          pip3 install distutils
+        if: ${{ runner.os == 'macOS'}}
+
       - name: npm install
         run: npm install
         env:
           PREBUILD: true
 
-      - name: install Mac build dependencies (brew)
-        run: brew install nasm pkg-config
-        if: ${{ runner.os == 'macOS'}}
 
       - name: install Mac dependencies (shared release x64)
         run: node ./install_ffmpeg.js --arch x64
