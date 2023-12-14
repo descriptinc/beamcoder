@@ -134,6 +134,7 @@
                 "ffmpeg/ffmpeg-5.x-win64-shared/bin/swscale-6.dll",
                 "node_modules/ffmpeg-ffprobe-static/ffmpeg.exe",
                 "node_modules/ffmpeg-ffprobe-static/ffprobe.exe"
+              ]
             }
           ]
     }],
