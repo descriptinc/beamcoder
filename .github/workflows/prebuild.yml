@@ -52,9 +52,8 @@ jobs:
 
       - name: install Mac build dependencies (brew)
         run: |
-          brew install nasm pkg-config pyenv
-          pyenv install 3.10
-          pyenv global 3.10
+          brew install nasm pkg-config 
+          python3 -m pip install packaging
           echo 'eval "$(pyenv init -)"' >> ~/.bashrc
         if: ${{ runner.os == 'macOS'}}
 
