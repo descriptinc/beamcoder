@@ -65,7 +65,7 @@
   },
   "overrides": {
     "prebuild": {
-      "node-gyp": "$node-gyp"
+      "node-gyp": "^10.0.1"
     }
   },
   "gypfile": true
