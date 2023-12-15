@@ -18,7 +18,7 @@
   },
   "binary": {
     "napi_versions": [
-      3
+      4
     ]
   },
   "files": [
