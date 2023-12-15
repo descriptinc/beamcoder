@@ -58,14 +58,14 @@
   "devDependencies": {
     "eslint": "^8.9.0",
     "ffmpeg-ffprobe-static": "^4.4.0-rc.11",
-    "node-gyp": "^10.0.1",
+    "node-gyp": "^9.4.1",
     "patch-package": "^6.2.2",
     "prebuild": "^12.1.0",
     "tape": "^5.5.2"
   },
   "overrides": {
     "prebuild": {
-      "node-gyp": "^10.0.1"
+      "node-gyp": "^9.4.1"
     }
   },
   "gypfile": true
