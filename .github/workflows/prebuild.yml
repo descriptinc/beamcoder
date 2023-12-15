@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:16.20.2-bookworm
-      options: --user 1000:1000
     steps:
       - name: install Linux dependencies
         run: |
