@@ -189,10 +189,10 @@ async function darwin() {
     else throw e;
   });
 
-  const version = '1.33rc3';
+  const version = '1.49.rc.1';
 
   // default to platform-architecture
-  let arch = os.arch()
+  let arch = os.arch();
 
   // but if the '--arch' argument is provided
   // use the next argument as the value (e.g. 'x64' or 'arm64')
@@ -206,7 +206,7 @@ async function darwin() {
   }
 
   const ffmpegFilename = `ffmpeg-ffprobe-shared-darwin-${arch}.${version}`;
-  const tag = `v${version}`
+  const tag = `v${version}`;
 
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
     const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
