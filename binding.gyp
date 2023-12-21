@@ -105,7 +105,7 @@
             "msvs_settings": {
               "VCCLCompilerTool": {
                 "RuntimeTypeInfo": "true",
-                "AdditionalOptions": ['/WX']
+                "AdditionalOptions": []
               }
             }
           }
