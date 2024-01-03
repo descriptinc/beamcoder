@@ -24,9 +24,7 @@
         "cflags_cc": [
           "-std=c++11",
           "-fexceptions"
-        ]
-      }],
-      ['OS!="win" and OS!="linux"', {
+        ],
         "link_settings": {
           "libraries": [
             "-lavcodec",
