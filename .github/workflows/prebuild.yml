@@ -11,7 +11,7 @@ jobs:
         shell: bash
         run: |
           apt update
-          DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --no-install-suggests -y git libxcb1 unzip nodejs curl nodejs npm
+          DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --no-install-suggests -y git git-lfs libxcb1 unzip nodejs curl nodejs npm
           DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --no-install-suggests -y python3-setuptools build-essential
 
       - uses: actions/checkout@v2
