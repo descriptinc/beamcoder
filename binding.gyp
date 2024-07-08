@@ -14,6 +14,10 @@
                   "src/codec.cc", "src/hwcontext.cc" ],
     "conditions": [
       ['OS=="linux"', {
+        "variables": {
+           "ffmpeg_version": "1.49.rc.1",
+           "target_arch_override": "<!(node -p \"'<(target_arch)' === 'x64' ? 'x86_64' : '<(target_arch)'\")",
+        },
         "defines": [
           "__STDC_CONSTANT_MACROS"
         ],
@@ -25,7 +29,14 @@
           "-std=c++11",
           "-fexceptions"
         ],
+        "include_dirs": [
+          "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-linux-<(target_arch_override).<(ffmpeg_version)/include/"
+        ],
+
         "link_settings": {
+          "library_dirs": [
+            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-linux-<(target_arch_override).<(ffmpeg_version)/"
+          ],
           "libraries": [
             "-lavcodec",
             "-lavdevice",
@@ -138,18 +149,6 @@
               ]
             }
           ]
-    }],
-    ['OS=="linux"', {
-      "libraries": [
-        "<!(pkg-config --libs libavcodec)",
-        "<!(pkg-config --libs libavdevice)",
-        "<!(pkg-config --libs libavfilter)",
-        "<!(pkg-config --libs libavformat)",
-        "<!(pkg-config --libs libavutil)",
-        "<!(pkg-config --libs libpostproc)",
-        "<!(pkg-config --libs libswresample)",
-        "<!(pkg-config --libs libswscale)"
-      ]
     }],
     ['OS=="mac"', {
       "include_dirs" : [

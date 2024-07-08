@@ -3,16 +3,10 @@ on: [push]
 
 jobs:
   linux-package:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: node:16.20.2-bookworm
     steps:
-      - name: install Linux dependencies
-        run: |
-          apt-get update
-          apt-get install -y build-essential git git-lfs pkg-config libtool python3 python-is-python3
-          apt-get install -y libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libzimg-dev
-
       - uses: actions/checkout@v2
         with:
           lfs: true
