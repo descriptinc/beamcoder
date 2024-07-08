@@ -176,7 +176,10 @@ async function linux() {
       });
 
       await exec(`unzip ffmpeg/${ffmpegFilename}.zip -d ffmpeg/${ffmpegFilename}/`);
+
+      console.log('Adding path  "$PWD/ffmpeg/${ffmpegFilename}/" to ldconfig path');
       await exec(`echo "$PWD/ffmpeg/${ffmpegFilename}/" | tee -a /etc/ld.so.conf.d/ffmpeg.conf`)
+      console.log('Running LDCONFIG');
       await exec(`ldconfig`)
     });
 

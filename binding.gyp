@@ -34,19 +34,8 @@
         ],
 
         "link_settings": {
-          "library_dirs": [
-            "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-linux-<(target_arch_override).<(ffmpeg_version)/"
-          ],
           "libraries": [
-            "-lavcodec",
-            "-lavdevice",
-            "-lavfilter",
-            "-lavformat",
-            "-lavutil",
-            "-lpostproc",
-            "-lswresample",
-            "-lswscale",
-            "-lzimg"
+              "-L<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-linux-<(target_arch_override).<(ffmpeg_version)/"
           ]
         },
         "copies": [

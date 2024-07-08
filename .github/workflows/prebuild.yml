@@ -5,17 +5,23 @@ jobs:
   linux-package:
     runs-on: ubuntu-24.04
     container:
-      image: node:16.20.2-bookworm
+      image: ubuntu:24.04
     steps:
       - uses: actions/checkout@v2
         with:
           lfs: true
 
+      - name: check Linux dependencies
+        shell: bash
+        run: |
+          apt update
+          DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --no-install-suggests -y libxcb1 unzip nodejs curl nodejs npm
+          DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --no-install-suggests -y python3-setuptools build-essential
+
       - name: npm install
         run: npm install
         env:
           PREBUILD: true
-
 
       - name: check Linux dependencies
         run: node ./install_ffmpeg.js
@@ -23,8 +29,8 @@ jobs:
       - name: prebuild for Linux (x64)
         run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
 
-      - name: prebuild for Linux (arm64)
-        run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+      # - name: prebuild for Linux (arm64)
+      #   run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
 
   package:
     runs-on: ${{ matrix.os }}
