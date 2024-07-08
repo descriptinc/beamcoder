@@ -1,8 +1,13 @@
 name: prebuild
 on: [push]
 
+permissions:
+  contents: write
+
 jobs:
   linux-package:
+  permissions:
+    contents: write
     runs-on: ubuntu-24.04
     container:
       image: ubuntu:24.04
@@ -33,6 +38,8 @@ jobs:
       #   run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
 
   package:
+    permissions:
+      contents: write
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -61,7 +68,6 @@ jobs:
         env:
           PREBUILD: true
 
-
       - name: install Mac dependencies (shared release x64)
         run: node ./install_ffmpeg.js --arch x64
         if: ${{ runner.os == 'macOS'}}
@@ -77,10 +83,6 @@ jobs:
       - name: prebuild Release for macOS (x64)
         run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --verbose --upload ${{ secrets.GITHUB_TOKEN }}
         if: ${{ runner.os == 'macOS'}}
-
-#      - name: prebuild Debug for macOS (x64)
-#        run: npx prebuild --debug --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
-#        if: ${{ runner.os == 'macOS'}}
 
       - name: clean build directory for cross-compiling
         run: rm ./build/Release/*.dylib || true
