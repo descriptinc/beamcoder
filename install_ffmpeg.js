@@ -158,26 +158,31 @@ async function linux() {
     const tag = `v${version}`;
 
     await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
-      const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.zip`);
-      const url = `https://github.com/descriptinc/ffmpeg-build-script/releases/download/${tag}/${ffmpegFilename}.zip`
+      const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.tar.gz`);
+      const url = `https://github.com/descriptinc/ffmpeg-build-script/releases/download/${tag}/${ffmpegFilename}.tar.gz`
       console.log(url);
       await get(
           ws,
           url,
-          `${ffmpegFilename}.zip`
+          `${ffmpegFilename}.tar.gz`
       ).catch(async (err) => {
         if (err.name === 'RedirectError') {
           const redirectURL = err.message;
-          await get(ws, redirectURL, `${ffmpegFilename}.zip`);
+          await get(ws, redirectURL, `${ffmpegFilename}.tar.gz`);
         } else {
           console.error(err);
           throw err;
         }
       });
 
-      await exec(`unzip ffmpeg/${ffmpegFilename}.zip -d ffmpeg/${ffmpegFilename}/`);
+      await mkdir(`ffmpeg/${ffmpegFilename}`).catch(e => {
+        if (e.code === 'EEXIST') return;
+        else throw e;
+      });
+  
+      await exec(`tar xvzf ffmpeg/${ffmpegFilename}.tar.gz -C ffmpeg/${ffmpegFilename}/`);
 
-      console.log('Adding path  "$PWD/ffmpeg/${ffmpegFilename}/" to ldconfig path');
+      console.log(`Adding path  "$PWD/ffmpeg/${ffmpegFilename}/" to ldconfig path`);
       await exec(`echo "$PWD/ffmpeg/${ffmpegFilename}/" | tee -a /etc/ld.so.conf.d/ffmpeg.conf`)
       console.log('Running LDCONFIG');
       await exec(`ldconfig`)
