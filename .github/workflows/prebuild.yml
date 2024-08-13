@@ -16,8 +16,9 @@ jobs:
         shell: bash
         run: |
           apt update
-          DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --no-install-suggests -y git git-lfs \
+          DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends --no-install-suggests -y git git-lfs \
             libxcb1 unzip nodejs curl nodejs npm python3-setuptools build-essential libxcb1-dev
+          DEBIAN_FRONTEND=noninteractive apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libzimg-dev
 
       - uses: actions/checkout@v2
         with:

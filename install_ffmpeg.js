@@ -131,63 +131,6 @@ async function win32() {
 }
 
 async function linux() {
-    console.log('Checking/downloading ffmpeg shared libraries');
-
-    await mkdir('ffmpeg').catch(e => {
-      if (e.code === 'EEXIST') return;
-      else throw e;
-    });
-
-    const version = '1.49.rc.1';
-
-    // default to platform-architecture
-    let arch = os.arch();
-
-    // but if the '--arch' argument is provided
-    // use the next argument as the value (e.g. 'x64' or 'arm64')
-    const overrideArchIndex = process.argv.indexOf('--arch');
-    if (0 < overrideArchIndex && overrideArchIndex < process.argv.length - 1) {
-      arch = process.argv[overrideArchIndex + 1];
-    }
-
-    if (arch === 'x64') {
-      arch = 'x86_64';
-    }
-
-    const ffmpegFilename = `ffmpeg-ffprobe-shared-linux-${arch}.${version}`;
-    const tag = `v${version}`;
-
-    await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
-      const ws = fs.createWriteStream(`ffmpeg/${ffmpegFilename}.tar.gz`);
-      const url = `https://github.com/descriptinc/ffmpeg-build-script/releases/download/${tag}/${ffmpegFilename}.tar.gz`
-      console.log(url);
-      await get(
-          ws,
-          url,
-          `${ffmpegFilename}.tar.gz`
-      ).catch(async (err) => {
-        if (err.name === 'RedirectError') {
-          const redirectURL = err.message;
-          await get(ws, redirectURL, `${ffmpegFilename}.tar.gz`);
-        } else {
-          console.error(err);
-          throw err;
-        }
-      });
-
-      await mkdir(`ffmpeg/${ffmpegFilename}`).catch(e => {
-        if (e.code === 'EEXIST') return;
-        else throw e;
-      });
-  
-      await exec(`tar xvzf ffmpeg/${ffmpegFilename}.tar.gz -C ffmpeg/${ffmpegFilename}/`);
-
-      console.log(`Adding path  "$PWD/ffmpeg/${ffmpegFilename}/" to ldconfig path`);
-      await exec(`echo "$PWD/ffmpeg/${ffmpegFilename}/" | tee -a /etc/ld.so.conf.d/ffmpeg.conf`)
-      console.log('Running LDCONFIG');
-      await exec(`ldconfig`)
-    });
-
   console.log('Checking FFmpeg dependencies for Beam Coder on Linux.');
   const { stdout } = await execFile('ldconfig', ['-p']).catch(console.error);
   let result = 0;
@@ -231,8 +174,7 @@ async function linux() {
 
   if (result === 1) {
     console.log(`Try running the following (Ubuntu/Debian):
-sudo add-apt-repository ppa:savoury1/ffmpeg4
-sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libzimg-dev`);
+    sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libzimg-dev`);
     process.exit(1);
   }
   return result;
