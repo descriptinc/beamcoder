@@ -10,7 +10,7 @@ jobs:
       contents: write
     runs-on: ubuntu-24.04
     container:
-      image: ubuntu:24.04
+      image: node:18.20.4-bookworm
     steps:
       - name: check Linux dependencies
         shell: bash

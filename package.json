@@ -1,6 +1,6 @@
 {
   "name": "beamcoder-prebuild",
-  "version": "0.7.1-rc.15",
+  "version": "0.7.1-rc.16",
   "description": "Node.js native bindings to FFmpeg.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -60,7 +60,7 @@
     "node-gyp": "^9.4.1",
     "patch-package": "^6.2.2",
     "prebuild": "^12.1.0",
-    "ffmpeg-ffprobe-static": "^6.1.1-rc.5",
+    "ffmpeg-ffprobe-static": "^6.1.1",
     "tape": "^5.5.2"
   },
   "overrides": {
