@@ -69,14 +69,6 @@
         "defines": [
           "__STDC_CONSTANT_MACROS"
         ],
-        "cflags_cc!": [
-          "-fno-rtti",
-          "-fno-exceptions"
-        ],
-        "cflags_cc": [
-          "-std=c++11",
-          "-fexceptions"
-        ],
         "include_dirs": [
           "<(module_root_dir)/ffmpeg/ffmpeg-ffprobe-shared-darwin-<(target_arch_override).<(ffmpeg_version)/include/"
         ],
@@ -99,6 +91,8 @@
         },
         'xcode_settings': {
           'MACOSX_DEPLOYMENT_TARGET': '10.11',
+          'OTHER_CFLAGS': ['-fno-rtti', '-fno-exceptions', '-arch <(target_arch_override)', '-v'],
+          'OTHER_LDFLAGS': ['-arch <(target_arch_override)'],
         },
         "copies": [
             {
@@ -151,14 +145,6 @@
               ]
             }
           ]
-    }],
-    ['OS=="mac"', {
-      "include_dirs" : [
-        "/opt/homebrew/Cellar/ffmpeg/5.0/include"
-      ],
-      "library_dirs": [
-        "/opt/homebrew/Cellar/ffmpeg/5.0/lib",
-      ]
     }],
   ]
 }]
