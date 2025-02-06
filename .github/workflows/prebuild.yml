@@ -36,6 +36,9 @@ jobs:
       - name: prebuild for Linux (x64)
         run: npx prebuild --runtime napi --arch x64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
 
+      - name: prebuild for Linux (arm64)
+        run: npx prebuild --runtime napi --arch arm64 --include-regex '(\.node|\.dylib|ffmpeg|ffprobe)$' --upload ${{ secrets.GITHUB_TOKEN }}
+
   windows-package:
     permissions:
       contents: write
